@@ -10,20 +10,33 @@
 \RequirePackage[numbered]{matlab-prettifier}
 \RequirePackage[colorlinks]{hyperref}
 
-% ---------- Metadatos i referències ----------
+% Hyperref
 \hypersetup{
   pdftitle=\@title,
   pdfauthor=\@author}
 
-% ---------- Opcions de la entrega ----------
+% Opcions del paquet
 \SetupKeyvalOptions{family=entrega, prefix=entrega@}
 \DeclareStringOption[]{assignatura}
 \DeclareStringOption[qtm]{titlefont}
 \DeclareStringOption[\LARGE\bfseries]{titlespec}
 \DeclareBoolOption{quartilla}
+\DeclareBoolOption{times}
+\DeclareBoolOption{times-nomath}
 \ProcessKeyvalOptions*
 
-% ---------- Configuració de pàgina ----------
+% Document complet en Times New Roman
+\ifentrega@times
+  \RequirePackage[helvratio=.87,vvarbb]{newtx}
+\else
+  \ifentrega@times-nomath
+    \RequirePackage[nohelv,nott]{newtxtext}
+    \RequirePackage[scaled=.87]{helvet}
+    \RequirePackage[scaled=.95]{newtxtt}
+  \fi
+\fi
+
+% Configuració de pàgina
 \ifentrega@quartilla
   \geometry{
     a5paper,
@@ -36,7 +49,7 @@
     includehead,}
 \fi
 
-% ---------- Fancyhdr -----------
+% Fancyhdr
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[C]{%
@@ -49,7 +62,7 @@
   \small\sffamily%
   \thepage}
 
-% ---------- ENUNCIATS ----------
+% Enunciats
 \def\enunciats{\color{DarkBlue}}
 \newtheoremstyle{enunciatbf}{}{}%
   {\enunciats}{}%
@@ -70,7 +83,7 @@
   \hspace{.5em}Apartat~\textup{\theapartat}}
 \theoremstyle{plain}
 
-% ----------- COMANDAMENTS ------------
+% Comandaments
 \def\bigO{\mathcal{O}}
 \def\maketitle{%
   \thispagestyle{empty}%
@@ -82,7 +95,7 @@
   \par\noindent\textsf{\@author}\hfill\textsf{\@date}
   \par\bigskip}
 
-% ----------- CODIS: listings i matlab output
+% Codis (per a Matlab)
 \fvset{fontsize=\footnotesize}
 \lstset{
   style=Matlab-editor,
