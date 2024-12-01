@@ -18,6 +18,8 @@
 % ---------- Opcions de la entrega ----------
 \SetupKeyvalOptions{family=entrega, prefix=entrega@}
 \DeclareStringOption[]{assignatura}
+\DeclareStringOption[qtm]{titlefont}
+\DeclareStringOption[\LARGE\bfseries]{titlespec}
 \DeclareBoolOption{quartilla}
 \ProcessKeyvalOptions*
 
@@ -73,7 +75,9 @@
 \def\maketitle{%
   \thispagestyle{empty}%
   \noindent%
-  {\LARGE\bfseries\@title\hfill\entrega@assignatura}
+  {\fontfamily{\entrega@titlefont}\selectfont
+    \entrega@titlespec%
+    \@title\hfill\entrega@assignatura}
   \par\vspace{1ex}\hrule\vspace{1ex}
   \par\noindent\textsf{\@author}\hfill\textsf{\@date}
   \par\bigskip}
