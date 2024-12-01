@@ -22,14 +22,14 @@
 \DeclareStringOption[\LARGE\bfseries]{titlespec}
 \DeclareBoolOption{quartilla}
 \DeclareBoolOption{times}
-\DeclareBoolOption{times-nomath}
+\DeclareBoolOption{timesnomath}
 \ProcessKeyvalOptions*
 
 % Document complet en Times New Roman
 \ifentrega@times
   \RequirePackage[helvratio=.87,vvarbb]{newtx}
 \else
-  \ifentrega@times-nomath
+  \ifentrega@timesnomath
     \RequirePackage[nohelv,nott]{newtxtext}
     \RequirePackage[scaled=.87]{helvet}
     \RequirePackage[scaled=.95]{newtxtt}
