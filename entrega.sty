@@ -1,0 +1,105 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{entrega}[2024/11/14 Plantilla per a entregues]
+
+\RequirePackage{kvoptions}
+\RequirePackage{amsthm}
+\RequirePackage{geometry}
+\RequirePackage[svgnames]{xcolor}
+\RequirePackage[nocheck]{fancyhdr}
+\RequirePackage{fancyvrb}
+\RequirePackage[numbered]{matlab-prettifier}
+\RequirePackage[colorlinks]{hyperref}
+
+% ---------- Metadatos i referències ----------
+\hypersetup{
+  pdftitle=\@title,
+  pdfauthor=\@author}
+
+% ---------- Opcions de la entrega ----------
+\SetupKeyvalOptions{family=entrega, prefix=entrega@}
+\DeclareStringOption[]{assignatura}
+\DeclareBoolOption{quartilla}
+\ProcessKeyvalOptions*
+
+% ---------- Configuració de pàgina ----------
+\ifentrega@quartilla
+  \geometry{
+    a5paper,
+    margin=1cm,
+    includehead,}
+\else
+  \geometry{
+    a4paper,
+    margin=2.5cm,
+    includehead,}
+\fi
+
+% ---------- Fancyhdr -----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{%
+  \small\sffamily%
+  \@title}
+\fancyhead[L]{%
+  \small\sffamily%
+  \@author}
+\fancyhead[R]{%
+  \small\sffamily%
+  \thepage}
+
+% ---------- ENUNCIATS ----------
+\def\enunciats{\color{DarkBlue}}
+\newtheoremstyle{enunciatbf}{}{}%
+  {\enunciats}{}%
+  {\sffamily\bfseries\color{black}}%
+  {}{0.5em}{}%
+\newtheoremstyle{enunciatit}{}{}%
+  {\enunciats}{}%
+  {\sffamily\itshape\color{black}}%
+  {}{0.5em}{}%
+\theoremstyle{enunciatbf}
+\newtheorem{problema}{Problema}
+\theoremstyle{enunciatit}
+\newtheorem{apartat}{Apartat}[problema]
+\newtheorem*{probapartat}{%
+  \refstepcounter{problema}%
+  \refstepcounter{apartat}%
+  \textup{\textbf{Problema~\theproblema}}%
+  \hspace{.5em}Apartat~\textup{\theapartat}}
+\theoremstyle{plain}
+
+% ----------- COMANDAMENTS ------------
+\def\bigO{\mathcal{O}}
+\def\maketitle{%
+  \thispagestyle{empty}%
+  \noindent%
+  {\LARGE\bfseries\@title\hfill\entrega@assignatura}
+  \par\vspace{1ex}\hrule\vspace{1ex}
+  \par\noindent\textsf{\@author}\hfill\textsf{\@date}
+  \par\bigskip}
+
+% ----------- CODIS: listings i matlab output
+\fvset{fontsize=\footnotesize}
+\lstset{
+  style=Matlab-editor,
+  basicstyle=\footnotesize\ttfamily,
+  inputencoding=utf8,
+  literate={á}{{\'a}}1
+    {à}{{\`a}}1
+    {Á}{{\'A}}1
+    {À}{{\`A}}1
+    {é}{{\'e}}1
+    {è}{{\`e}}1
+    {É}{{\'E}}1
+    {È}{{\`E}}1
+    {í}{{\'i}}1
+    {Í}{{\'I}}1
+    {ó}{{\'o}}1
+    {ò}{{\`o}}1
+    {Ó}{{\'O}}1
+    {ú}{{\'u}}1
+    {Ú}{{\'U}}1
+    {ü}{{\"u}}1
+    {Ü}{{\"U}}1
+    {\\\%}{{\%}}1 
+    {ç}{{\c{c}}}1}
