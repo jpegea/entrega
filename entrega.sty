@@ -63,25 +63,19 @@
   \thepage}
 
 % Enunciats
-\def\enunciats{\color{DarkBlue}}
-\newtheoremstyle{enunciatbf}{}{}%
-  {\enunciats}{}%
-  {\sffamily\bfseries\color{black}}%
-  {}{0.5em}{}%
-\newtheoremstyle{enunciatit}{}{}%
-  {\enunciats}{}%
-  {\sffamily\itshape\color{black}}%
-  {}{0.5em}{}%
-\theoremstyle{enunciatbf}
+\newtheoremstyle{enunciat}{0pt}{0pt}{}{}{\sffamily\bfseries}{}{.5em}{}
+\theoremstyle{enunciat}
 \newtheorem{problema}{Problema}
-\theoremstyle{enunciatit}
-\newtheorem{apartat}{Apartat}[problema]
+\newtheorem{apartat}{}[problema]
+\renewcommand{\theapartat}{\theproblema.\,\alph{apartat})}
 \newtheorem*{probapartat}{%
   \refstepcounter{problema}%
   \refstepcounter{apartat}%
-  \textup{\textbf{Problema~\theproblema}}%
-  \hspace{.5em}Apartat~\textup{\theapartat}}
-\theoremstyle{plain}
+  \textbf{Problema~\theproblema.\,\alph{apartat})}}
+
+\tcolorboxenvironment{problema}{enhanced, sharp corners, frame hidden, boxrule=0pt, borderline west={2pt}{0pt}{DarkBlue}, top=2pt, bottom=2pt, left=4pt, right=3pt, colframe=DarkBlue, colback=DarkBlue!5}
+\tcolorboxenvironment{probapartat}{enhanced, sharp corners, frame hidden, boxrule=0pt, borderline west={2pt}{0pt}{DarkBlue}, top=2pt, bottom=2pt, left=4pt, right=3pt, colframe=DarkBlue, colback=DarkBlue!5}
+\tcolorboxenvironment{apartat}{enhanced, sharp corners, frame hidden, boxrule=0pt, top=2pt, bottom=2pt, left=4pt, right=3pt, colframe=DarkBlue, colback=DarkBlue!5}
 
 % Comandaments
 \def\bigO{\mathcal{O}}
